@@ -80,12 +80,6 @@ body {
     background: rgb(30,30,30);
     padding: 10px;
 }
-.bright-black{
-    color: rgb(94, 94, 250);
-}
-.gold{
-    color: rgb(190, 159, 19)
-}
 #back{
     position: absolute;
     top: 90%;
