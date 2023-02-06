@@ -1,0 +1,208 @@
+* {
+    font-family: 'Courier';
+    color: white;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background: black;
+}
+
+/* 
+    HOME PAGE 
+*/
+#arthur{
+    position:absolute;
+    left: 200px;
+}
+#backgroundImg{
+    outline: solid black 2px;
+    outline-offset: -2px;
+}
+#main-menu {
+    display: block;
+    background: rgb(50, 50, 50);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15%;
+    height: 40%;
+    outline: solid rgb(50, 50, 50) 5px;
+    outline-offset: 5px;
+}
+#menu-button{
+    display: block;
+    width: 90%;
+    margin:auto;
+    margin-top: 10px;
+    background: rgb(30, 30, 30);
+    border:none;
+    outline:none;
+    text-decoration: none;
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+    cursor: pointer;
+    transition-duration: 200ms;
+    font-size: medium;
+}
+#menu-button:hover{
+    outline: solid white 1px;
+    outline-offset: 3px;
+}
+#settings{
+    display: none;
+    background: rgb(50, 50, 50);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 90%;
+}
+#settings h2{
+    margin: 20px;
+    background: rgb(30,30,30);
+    padding: 10px;
+}
+#credits{
+    display: none;
+    background: rgb(50, 50, 50);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 90%;
+}
+#credits p, #credits h2{
+    margin: 20px;
+    background: rgb(30,30,30);
+    padding: 10px;
+}
+.bright-black{
+    color: rgb(94, 94, 250);
+}
+.gold{
+    color: rgb(190, 159, 19)
+}
+#back{
+    position: absolute;
+    top: 90%;
+    left: 40px;
+    transform: translate(-50%);
+    border-radius: 100%;
+    cursor:pointer;
+}
+#back:hover{
+    opacity: .8;
+    outline: solid white 2px;
+}
+
+/* 
+    GAME 
+*/
+#overlay{
+    display: block;
+    background: black;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    z-index: 2;
+}
+#game-over{
+    display: none;
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    left: 50%;
+    width: 30%;
+    height: 40%;
+    transform: translate(-50%, -50%);
+}
+#game-over #text{
+    height: 80%;
+    background: rgb(50, 50, 50);
+}
+#game-over #text p{
+    text-align: center;
+    margin: 10px 5px 10px 5px;
+    font-size: 22px;
+}
+#game-over #text h1{
+    color: red;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+#game-over #buttons{
+    margin-top: 10px;
+}
+#game-over #buttons #button{
+    padding: 10px 20px;
+    text-decoration: none;
+    text-align: center;
+    background: rgb(50, 50, 50);
+    display: inline-block;
+    border: none;
+    width: calc(50% - 25px);
+    font-size: medium;
+    transition-duration: 150ms;
+}
+#game-over #buttons #button:hover{
+    outline: solid white 1px;
+    outline-offset: 3px;
+}
+
+#dialog {
+    display: block;
+    padding: 5px;
+    width: 60%;
+    height: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(30, 30, 30);
+}
+
+#dialog-text {
+    background: rgb(20, 20, 20);
+    padding: 5px;
+    margin: 10px;
+}
+
+#dialog-input {
+    border: none;
+    outline: none;
+    background: rgb(50, 50, 50);
+    padding: 10px;
+    margin: 10px;
+    display: block;
+    width: calc(100% - 40px);
+}
+.dialog-button {
+    padding: 10px 20px;
+    background: rgb(50, 50, 50);
+    display: inline-block;
+    border: none;
+    margin: 10px;
+    transition-duration: 150ms;
+}
+.dialog-button.enabled:hover {
+    outline: solid white 1px;
+    outline-offset: 2px;
+}
+.dialog-button.enabled {
+    cursor: pointer;
+}
+.dialog-button.disabled {
+    cursor: default;
+    color: rgb(255, 255, 255, .6)
+}
+.dialog-button.disabled.active {
+    color: white;
+}
