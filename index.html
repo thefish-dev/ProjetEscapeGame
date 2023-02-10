@@ -11,7 +11,10 @@
 <body>
 	<div id="over"></div>
 	<img id="arthur" src="images/Img1.png" width="500px">
-	<h1 id="title">Escape from Russia</h1>
+	<h1 id="title">
+		<img id="russie" src="images/Russie.jpg" width="500px">
+		Escape from Russia		
+	</h1>
 	<div id="main-menu">
 		<a id="menu-button" href="game.html">Jouer</a>
 		<button class="settings" id="menu-button" onclick="menuOpen(this.className);">Paramètres</button>
@@ -24,10 +27,18 @@
 	</div>
 	<div id="credits">
 		<h2>Crédits</h2>
-		<p><span><img src="images/icon.png" width="200px"></span>Demet LE GAL - Programmeur en Chef</p>
-		<p><span><img src="images/icon.png" width="200px"></span>Louis BRYNIDSVOL-GIARD - Programmeur Secondaire</p>
-		<p><span><img src="images/Img1.png" width="200px"></span>Arthur PAILLEREAU - Beta Tester - Modèle</p>
-
+		<div>
+			<p><span><img src="images/icon.png" width="200px"></span><br/>Demet LE GAL 
+				<br/>- Programmeur en Chef
+			</p>
+			<p><span><img src="images/icon.png" width="200px"></span><br/>Louis BRYNIDSVOL-GIARD 
+				<br/>- Programmeur Secondaire	
+			</p>
+			<p><span><img src="images/Img1.png" width="200px"></span><br/>Arthur PAILLEREAU 
+				<br/>- Beta Tester 
+				<br/>- Modèle
+			</p>
+		</div>
 		<img id="back" src="images/back.png" alt="Back" width="50px" onclick="returnMenu();">
 	</div>
 	<script>
