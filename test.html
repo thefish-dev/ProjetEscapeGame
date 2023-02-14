@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+
+<body>
+    <h1 id="titre"></h1>
+    <button id="button1">Test</button>
+    <button id="button2">Test</button>
+    <button id="button3">Test</button>
+
+    <script>
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function newText(textContent) {
+            var text = document.getElementById("titre");
+            for (let i = 0; i < textContent.length; i++) {
+                await sleep(25);
+                text.innerHTML += textContent[i];
+            }
+        }
+        newText("Trouves les bons carrés");
+        async function Start(button) {
+            button.style.background = "rgb(100,100,100)";
+            await sleep(500);
+            button.style.background = "white";
+        }
+        async function Main() {
+            await sleep(1000);
+            Start(document.getElementById("button1"));
+            await sleep(500);
+            Start(document.getElementById("button2"));
+            await sleep(500);
+            Start(document.getElementById("button3"));
+            await sleep(500);
+        }
+        Main();
+    </script>
+    <style>
+        button {
+            background: white;
+        }
+    </style>
+</body>
+
+</html>
