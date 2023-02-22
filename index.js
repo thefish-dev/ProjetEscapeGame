@@ -20,6 +20,9 @@ async function gameOver() {
 // div dans lequel le dialog se passera
 let dialogbox
 
+// image dans laquelle notre acteur sera affiché
+let image
+
 // nouveau dialogue ou détruit le dialogue
 function Dialogue(state, type) {
     if (state) {
@@ -32,6 +35,17 @@ function resetDialogue(type) {
     Dialogue(false); Dialogue(true, type);
 }
 
+function Image(state, type, image) {
+    if (state) {
+        img = document.createElement("img");
+        img.id = `img-${type}`;
+        img.src = `images/${image}.png`
+        document.body.appendChild(img);
+    } else img.remove();
+}
+function resetImg(type) {
+    Image(false); Image(true, type);
+}
 // créé un paragraphe dans le dialogue
 async function newText(textContent) {
 
@@ -85,9 +99,13 @@ function disableButtons(buttons) {
     });
 }
 
-
 async function start() {
     Dialogue(true, "main");
-    
+    Image(true, "main", "Img1");
+    await newText("Bonjour et bienvenu dans mon organisation, gniahaha !");
+    await sleep(500);
+    Image(true, "main", "Img2");
+    await newText("Êtes-vous prêt à me défier ?");
+    await sleep(1000);    
 }
 start()

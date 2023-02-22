@@ -121,6 +121,7 @@
         let alignes = [false, true, false, false, false];
         async function ecrou(range) {
             if (range.value == 5) {
+                range.disabled = true;
                 alignes[(range.id)] = true;
             } else {
                 alignes[(range.id)] = false;
@@ -142,7 +143,7 @@
             }
         }
 
-        start()
+        start();
     </script>
 </body>
 
@@ -151,9 +152,10 @@
         width: 50%;
         height: calc(5*75px);
         padding: 10px;
-        margin-left: 50%;
-        margin-top: 5%;
+        top: 10%;
+        left: 50%;
         transform: translate(-50%);
+        position: absolute;
         background: rgb(30, 30, 30);
         box-shadow: 0px 0px 5px 5px rgba(150, 150, 150, 0.1);
     }
