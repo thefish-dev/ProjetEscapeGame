@@ -7,20 +7,13 @@
     <meta name="co-founder" content="Louis BRYNIDSVOL-GIARD">
     <link rel="icon" type="image/x-icon" href="images/icon.png">
 
-    <title>Escape from Russia : Mission 1</title>
+    <title>Escape from Russia : Mission 3</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div id="main">
-        <div id="target"></div>
-        <div id="inputs">
-            <input type="range" min="1" max="9" value="8" class="slider" id="0" onchange="ecrou(this);">
-            <input type="range" min="1" max="9" value="5" class="slider" id="1" onchange="ecrou(this);">
-            <input type="range" min="1" max="9" value="2" class="slider" id="2" onchange="ecrou(this);">
-            <input type="range" min="1" max="9" value="7" class="slider" id="3" onchange="ecrou(this);">
-            <input type="range" min="1" max="9" value="4" class="slider" id="4" onchange="ecrou(this);">
-        </div>
+        
     </div>
     <div id="overlay"></div>
     <div id="game-over">
@@ -116,32 +109,6 @@
             resetDialogue("main");
             newText("Alignez les écrous pour ouvrir la porte.");
         }
-
-        // ecrou aligné?
-        let alignes = [false, true, false, false, false];
-        async function ecrou(range) {
-            if (range.value == 5) {
-                alignes[(range.id)] = true;
-            } else {
-                alignes[(range.id)] = false;
-            }
-
-            let compteur = 0;
-            alignes.forEach(element => {
-                if (element) compteur++;
-            });
-
-            if (compteur == 5) {
-                const target = document.getElementById("target");
-                target.style.zIndex = 1;
-                target.style.outline = "solid white 2px";
-                resetDialogue("main");
-                await newText("Bien joué ! Vous pouvez passer à l'étape suivante désormais.");
-                var suite = newButton("Passer à la suite");
-                suite.onclick = () => document.location = "mission2.html"
-            }
-        }
-
         start()
     </script>
 </body>
@@ -156,57 +123,6 @@
         transform: translate(-50%);
         background: rgb(30, 30, 30);
         box-shadow: 0px 0px 5px 5px rgba(150, 150, 150, 0.1);
-    }
-
-    #target {
-        background: rgb(150, 120, 0);
-        width: 100px;
-        height: 100%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: -1;
-    }
-
-    #inputs {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-        margin-bottom: 0;
-    }
-
-    .slider {
-        -webkit-appearance: none;
-        appearance: none;
-        margin: 0;
-        width: 100%;
-        height: 75px;
-        background: rgb(200, 175, 0);
-        outline: none;
-    }
-
-    .slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 100px;
-        height: 75px;
-        background: rgb(150, 120, 0);
-        cursor: pointer;
-    }
-
-    .slider::-webkit-slider-thumb:hover {
-        outline: solid white 1px;
-        outline-offset: -1px;
-    }
-
-    .slider::-moz-range-thumb {
-        width: 100px;
-        height: 75px;
-        background: rgb(150, 120, 0);
-        cursor: pointer;
     }
 </style>
 
