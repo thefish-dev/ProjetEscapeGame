@@ -57,13 +57,12 @@
         }
 
         // ecrou aligné?
+        let alignes = [false, true, false, false, false];
+        
         const ranges = document.querySelectorAll("input");
         ranges.forEach(range => {
-            range.onchange = ecrou(this);
-        });
-        let alignes = [false, true, false, false, false];
-        async function ecrou(range) {
-            if (range.value == 5) {
+            range.onchange = async () => {
+                if (range.value == 5) {
                 range.disabled = true;
                 alignes[(range.id)] = true;
             } else {
@@ -86,7 +85,8 @@
                 var suite = newButton(dialogbox, "Passer à la suite");
                 suite.onclick = () => document.location = "mission2.html"
             }
-        }
+            }
+        });
 
         start();
     </script>
