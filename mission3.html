@@ -104,10 +104,7 @@
         // départ
         async function start() {
             Dialogue(true, "main");
-            await newText("Voici la première étape de votre échappatoire !"); await sleep(500);
-            await newText("Réussissez-la avant le temps imparti pour passer à la suite."); await sleep(500);
-            resetDialogue("main");
-            newText("Alignez les écrous pour ouvrir la porte.");
+            await newText("Tu te débrouille bien finalement, mais réussiras-tu la mission suivante?"); await sleep(1000);
         }
         start()
     </script>

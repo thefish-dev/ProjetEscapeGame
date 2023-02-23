@@ -17,26 +17,21 @@ export async function gameOver() {
     gameover.style.display = "block";
 }
 
-// div dans lequel le dialog se passera
-let dialogbox
-
-// image dans laquelle notre acteur sera affiché
-let image
 
 // nouveau dialogue ou détruit le dialogue
-export function Dialogue(state, type) {
+export function Dialogue(dialogbox, state, type ) {
     if (state) {
         dialogbox = document.createElement("div");
         dialogbox.id = `dialog-${type}`;
         document.body.appendChild(dialogbox);
     } else dialogbox.remove();
 }
-export function resetDialogue(type) {
-    Dialogue(false); Dialogue(true, type);
+export function resetDialogue(dialogbox, type) {
+    Dialogue(dialogbox, false); Dialogue(dialogbox, true, type);
 }
 
 // nouvelle image ou détruit l'image
-export function Image(state, type, image) {
+export function Image(img, state, type, image) {
     if (state) {
         img = document.createElement("img");
         img.id = `img-${type}`;
@@ -44,12 +39,11 @@ export function Image(state, type, image) {
         document.body.appendChild(img);
     } else img.remove();
 }
-export function resetImg(type) {
-    Image(false); Image(true, type);
+export function resetImg(img, type) {
+    Image(img, false); Image(img, true, type);
 }
 // créé un paragraphe dans le dialogue
-export async function newText(textContent) {
-
+export async function newText(dialogbox, textContent) {
     let text
     if (document.getElementById("dialog-text")) {
         text = document.getElementById("dialog-text");
@@ -74,7 +68,7 @@ export async function newText(textContent) {
     return new Promise(resolve => resolve());
 }
 // créé un input dans le dialogue et retourne l'élément
-export function newInput(placeHolder) {
+export function newInput(dialogbox, placeHolder) {
     var input = document.createElement("input");
     input.placeholder = placeHolder;
     input.id = "dialog-input";
@@ -83,7 +77,7 @@ export function newInput(placeHolder) {
 }
 
 // créé un boutton dans le dialogue et retourne l'élément
-export function newButton(textContent) {
+export function newButton(dialogbox, textContent) {
     var button = document.createElement("button");
     button.classList.add("dialog-button");
     button.classList.add("enabled");

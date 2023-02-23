@@ -14,20 +14,20 @@
 <body>
 	<script type="module">
 		import { sleep, Dialogue, Image, newButton, newText } from './index.js';
-		
+
 		// div dans lequel le dialog se passera
 		let dialogbox
 		// image dans laquelle notre acteur sera affiché
-		let image
+		let img
 
 		async function start() {
-			Dialogue(true, "main");
-			Image(true, "main", "Img1");
-			await newText("Bonjour et bienvenu dans mon organisation, gniahaha !");
+			Dialogue(dialogbox, true, "main");
+			Image(img, true, "main", "Img1");
+			await newText(dialogbox, "Bonjour et bienvenu dans mon organisation, gniahaha !");
 			await sleep(500);
-			Image(true, "main", "Img2");
-			await newText("Êtes-vous prêt à me défier ?");
-			var button = newButton("Oui, absolument !");
+			Image(img, true, "main", "Img2");
+			await newText(dialogbox, "Êtes-vous prêt à me défier ?");
+			var button = newButton(dialogbox, "Oui, absolument !");
 			button.onclick = () => document.location = "mission1.html";
 		}
 		start()
