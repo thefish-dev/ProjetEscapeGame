@@ -19,13 +19,13 @@ export async function gameOver() {
 
 
 // nouveau dialogue ou détruit le dialogue
-export function Dialogue( state, type ) {
-    if (state) {
+export function Dialogue( state, type ) { // état du dialogue, type d'affichage du dialogue
+    if (state) { // créer un dialogue
         const dialogbox = document.createElement("div");
         dialogbox.id = `dialog-${type}`;
         document.body.appendChild(dialogbox);
         return dialogbox;
-    } else type.remove(); // type va être la dialogbox
+    } else type.remove(); // détruire le dialogue, type va être la dialogbox
 }
 export function resetDialogue(dialogbox, type) {
     Dialogue(false, dialogbox); return Dialogue( true, type);
@@ -47,9 +47,9 @@ export function resetImg(img, type) {
 // créé un paragraphe dans le dialogue
 export async function newText(dialogbox, textContent) {
     let text
-    if (document.getElementById("dialog-text")) {
+    if (document.getElementById("dialog-text")) { // si élément éxistant, le réutiliser
         text = document.getElementById("dialog-text");
-    } else {
+    } else { // sinon en créer un
         text = document.createElement("p");
         text.id = "dialog-text";
         dialogbox.appendChild(text);
@@ -59,14 +59,14 @@ export async function newText(dialogbox, textContent) {
     dialogbox.addEventListener("click", () => { clicked = true; });
 
     text.innerHTML = "> ";
-    for (let i = 0; i < textContent.length; i++) {
+    for (let i = 0; i < textContent.length; i++) { // boucle pour afficher le texte lettre par lettre
         await sleep(25);
-        if (clicked) break; // si bulle de dialogue clickée, afficher le texte sans délai
+        if (clicked) break; // si bulle de dialogue clickée, afficher le texte en entier et sans délai
         text.innerHTML += textContent[i];
     }
     text.innerHTML = `> ${textContent}`;
     clicked = false;
-    await sleep(250);
+    await sleep(250); // attendre 0.25 sec avant la fin de la fonction
     return new Promise(resolve => resolve());
 }
 // créé un input dans le dialogue et retourne l'élément
