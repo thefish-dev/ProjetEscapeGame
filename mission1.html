@@ -37,92 +37,13 @@
 
     </div>
 
-    <script>
-
-        // Fonction python time.sleep() version JS
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        // menu game over
-        async function gameOver() {
-            var gameover = document.getElementById("game-over");
-            var overlay = document.getElementById("overlay");
-            overlay.style.display = "block";
-            for (let i = 0; i < 1; i += .1) {
-                await sleep(50);
-                overlay.style.opacity = i;
-            }
-            await sleep(50);
-            gameover.style.display = "block";
-        }
-
-        // div dans lequel le dialog se passera
-        let dialogbox
-
-        // nouveau dialogue ou détruit le dialogue
-        function Dialogue(state, type) {
-            if (state) {
-                dialogbox = document.createElement("div");
-                dialogbox.id = `dialog-${type}`;
-                const text = document.createElement("p");
-                text.id = "tip"
-                text.innerHTML = "Tapez pour passer.."
-                dialogbox.appendChild(text)
-                document.body.appendChild(dialogbox);
-            } else dialogbox.remove();
-        }
-        function resetDialogue(type) {
-            Dialogue(false); Dialogue(true, type);
-        }
-        // nouvelle image ou détruit l'image
-        function Image(state, type, image) {
-            if (state) {
-                img = document.createElement("img");
-                img.id = `img-${type}`;
-                img.src = `images/${image}.png`
-                document.body.appendChild(img);
-            } else img.remove();
-        }
-        function resetImg(type) {
-            Image(false); Image(true, type);
-        }
-
-        // créé un paragraphe dans le dialogue
-        async function newText(textContent) {
-
-            let text
-            if (document.getElementById("dialog-text")) {
-                text = document.getElementById("dialog-text");
-            } else {
-                text = document.createElement("p");
-                text.id = "dialog-text";
-                dialogbox.appendChild(text);
-            }
-
-            let clicked = false;
-            dialogbox.addEventListener("click", () => { clicked = true; });
-
-            text.innerHTML = "> ";
-            for (let i = 0; i < textContent.length; i++) {
-                await sleep(25);
-                if (clicked) break; // si bulle de dialogue clickée, afficher le texte sans délai
-                text.innerHTML += textContent[i];
-            }
-            text.innerHTML = `> ${textContent}`;
-            clicked = false;
-            await sleep(250);
-            return new Promise(resolve => resolve());
-        }
-        // créé un boutton dans le dialogue et retourne l'élément
-        function newButton(textContent) {
-            var button = document.createElement("button");
-            button.classList.add("dialog-button");
-            button.classList.add("enabled");
-            button.innerHTML = textContent;
-            dialogbox.appendChild(button);
-            return button
-        }
+    <script type="module">
+		import { sleep, Dialogue, Image, newButton, newText } from './index.js';
+		
+		// div dans lequel le dialog se passera
+		let dialogbox
+		// image dans laquelle notre acteur sera affiché
+		let image
 
         // départ
         async function start() {

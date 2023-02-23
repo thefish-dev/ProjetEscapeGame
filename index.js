@@ -1,11 +1,11 @@
 
 // Fonction python time.sleep() version JS
-function sleep(ms) {
+export function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // menu game over
-async function gameOver() {
+export async function gameOver() {
     var gameover = document.getElementById("game-over");
     var overlay = document.getElementById("overlay");
     overlay.style.display = "block";
@@ -24,19 +24,19 @@ let dialogbox
 let image
 
 // nouveau dialogue ou détruit le dialogue
-function Dialogue(state, type) {
+export function Dialogue(state, type) {
     if (state) {
         dialogbox = document.createElement("div");
         dialogbox.id = `dialog-${type}`;
         document.body.appendChild(dialogbox);
     } else dialogbox.remove();
 }
-function resetDialogue(type) {
+export function resetDialogue(type) {
     Dialogue(false); Dialogue(true, type);
 }
 
 // nouvelle image ou détruit l'image
-function Image(state, type, image) {
+export function Image(state, type, image) {
     if (state) {
         img = document.createElement("img");
         img.id = `img-${type}`;
@@ -44,11 +44,11 @@ function Image(state, type, image) {
         document.body.appendChild(img);
     } else img.remove();
 }
-function resetImg(type) {
+export function resetImg(type) {
     Image(false); Image(true, type);
 }
 // créé un paragraphe dans le dialogue
-async function newText(textContent) {
+export async function newText(textContent) {
 
     let text
     if (document.getElementById("dialog-text")) {
@@ -74,7 +74,7 @@ async function newText(textContent) {
     return new Promise(resolve => resolve());
 }
 // créé un input dans le dialogue et retourne l'élément
-function newInput(placeHolder) {
+export function newInput(placeHolder) {
     var input = document.createElement("input");
     input.placeholder = placeHolder;
     input.id = "dialog-input";
@@ -83,7 +83,7 @@ function newInput(placeHolder) {
 }
 
 // créé un boutton dans le dialogue et retourne l'élément
-function newButton(textContent) {
+export function newButton(textContent) {
     var button = document.createElement("button");
     button.classList.add("dialog-button");
     button.classList.add("enabled");
@@ -93,21 +93,9 @@ function newButton(textContent) {
 }
 
 // désactive les bouttons de la liste donnée comme argument
-function disableButtons(buttons) {
+export function disableButtons(buttons) {
     buttons.forEach(button => {
         button.disabled = true;
         button.classList.replace("enabled", "disabled");
     });
 }
-
-async function start() {
-    Dialogue(true, "main");
-    Image(true, "main", "Img1");
-    await newText("Bonjour et bienvenu dans mon organisation, gniahaha !");
-    await sleep(500);
-    Image(true, "main", "Img2");
-    await newText("Êtes-vous prêt à me défier ?");
-    var button = newButton("Oui, absolument !");
-    button.onclick = () => document.location = "mission1.html";
-}
-start()

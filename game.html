@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="author" content="Demet LE GAL">
@@ -11,7 +12,26 @@
 </head>
 
 <body>
-	<script src="index.js"></script>
+	<script type="module">
+		import { sleep, Dialogue, Image, newButton, newText } from './index.js';
+		
+		// div dans lequel le dialog se passera
+		let dialogbox
+		// image dans laquelle notre acteur sera affiché
+		let image
+
+		async function start() {
+			Dialogue(true, "main");
+			Image(true, "main", "Img1");
+			await newText("Bonjour et bienvenu dans mon organisation, gniahaha !");
+			await sleep(500);
+			Image(true, "main", "Img2");
+			await newText("Êtes-vous prêt à me défier ?");
+			var button = newButton("Oui, absolument !");
+			button.onclick = () => document.location = "mission1.html";
+		}
+		start()
+	</script>
 </body>
 
 </html>
