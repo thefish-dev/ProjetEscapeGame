@@ -65,11 +65,27 @@
             if (state) {
                 dialogbox = document.createElement("div");
                 dialogbox.id = `dialog-${type}`;
+                const text = document.createElement("p");
+                text.id = "tip"
+                text.innerHTML = "Tapez pour passer.."
+                dialogbox.appendChild(text)
                 document.body.appendChild(dialogbox);
             } else dialogbox.remove();
         }
         function resetDialogue(type) {
             Dialogue(false); Dialogue(true, type);
+        }
+        // nouvelle image ou détruit l'image
+        function Image(state, type, image) {
+            if (state) {
+                img = document.createElement("img");
+                img.id = `img-${type}`;
+                img.src = `images/${image}.png`
+                document.body.appendChild(img);
+            } else img.remove();
+        }
+        function resetImg(type) {
+            Image(false); Image(true, type);
         }
 
         // créé un paragraphe dans le dialogue
@@ -110,11 +126,13 @@
 
         // départ
         async function start() {
-            Dialogue(true, "main");
-            await newText("Voici la première étape de votre échappatoire !"); await sleep(500);
-            await newText("Réussissez-la avant le temps imparti pour passer à la suite."); await sleep(500);
+            Image(true, "side", "Img1")
+            Dialogue(true, "side");
+            await newText("Dans ce cas tentez d'ouvrir cette porte, même si c'est impossible, haha !"); await sleep(1000);
+            await newText("Réussissez avant le temps imparti pour passer à la suite."); await sleep(500);
             resetDialogue("main");
-            newText("Alignez les écrous pour ouvrir la porte.");
+            Image(false);
+            newText("Alignez les écrous au milieu pour ouvrir la porte.");
         }
 
         // ecrou aligné?
@@ -136,8 +154,10 @@
                 const target = document.getElementById("target");
                 target.style.zIndex = 1;
                 target.style.outline = "solid white 2px";
-                resetDialogue("main");
-                await newText("Bien joué ! Vous pouvez passer à l'étape suivante désormais.");
+                resetDialogue("side");
+                Image(true, "side", "Img1")
+                await newText("Mouais pas mal, je pensais pas que tu réussirais mais bon.."); await sleep(1000);
+                await newText("Voici la suite");
                 var suite = newButton("Passer à la suite");
                 suite.onclick = () => document.location = "mission2.html"
             }

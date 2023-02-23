@@ -42,7 +42,9 @@
 		</div>
 		<img id="back" src="images/back.png" alt="Back" width="50px" onclick="returnMenu();">
 	</div>
-	<script>
+	<script type="module">
+		import {test} from './module.js';
+		console.log(test());
 		const mainMenu = document.getElementById("main-menu");
 		function closeAll() {
 			document.getElementById("over").style.display="none";

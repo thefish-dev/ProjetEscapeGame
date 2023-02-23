@@ -35,6 +35,7 @@ function resetDialogue(type) {
     Dialogue(false); Dialogue(true, type);
 }
 
+// nouvelle image ou détruit l'image
 function Image(state, type, image) {
     if (state) {
         img = document.createElement("img");
@@ -106,6 +107,7 @@ async function start() {
     await sleep(500);
     Image(true, "main", "Img2");
     await newText("Êtes-vous prêt à me défier ?");
-    await sleep(1000);    
+    var button = newButton("Oui, absolument !");
+    button.onclick = () => document.location = "mission1.html";
 }
 start()
