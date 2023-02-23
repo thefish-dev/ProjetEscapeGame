@@ -16,7 +16,7 @@
 		Escape from Russia		
 	</h1>
 	<div id="main-menu">
-		<a id="menu-button" href="mission1.html">Jouer</a>
+		<a id="menu-button" href="game.html">Jouer</a>
 		<button class="settings" id="menu-button" onclick="menuOpen(this.className);">Paramètres</button>
 		<button class="credits" id="menu-button" onclick="menuOpen(this.className);">Crédits</button>
 	</div>
@@ -42,7 +42,7 @@
 		</div>
 		<img id="back" src="images/back.png" alt="Back" width="50px" onclick="returnMenu();">
 	</div>
-	<script type="module">
+	<script>
 		const mainMenu = document.getElementById("main-menu");
 		function closeAll() {
 			document.getElementById("over").style.display="none";
