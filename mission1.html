@@ -38,53 +38,88 @@
     </div>
 
     <script type="module">
-		import { sleep, Dialogue, Image, newButton, newText, resetDialogue } from './index.js';
-		
-		// div dans lequel le dialog se passera
-		let dialogbox
-		// image dans laquelle notre acteur sera affiché
-		let img
+        import { sleep, Dialogue, Image, newButton, newText, resetDialogue, gameOver } from './index.js';
 
+        // div dans lequel le dialog se passera
+        let dialogbox
+        // image dans laquelle notre acteur sera affiché
+        let img
+        
         // départ
+        let playing = true;
+        let perdu = false;
         async function start() {
             dialogbox = Dialogue(true, "side");
             img = Image(true, "side", "Img1")
-            await newText(dialogbox,"Dans ce cas tentez d'ouvrir cette porte, même si c'est impossible, haha !"); await sleep(1000);
-            await newText(dialogbox,"Réussissez avant le temps imparti pour passer à la suite."); await sleep(500);
-            dialogbox = resetDialogue(dialogbox,"main");
+            await newText(dialogbox, "Dans ce cas tentez d'ouvrir cette porte, même si c'est impossible, haha !"); await sleep(1000);
+            await newText(dialogbox, "Réussissez avant le temps imparti pour passer à la suite."); await sleep(500);
+            dialogbox = resetDialogue(dialogbox, "main");
             img = Image(img, false);
-            newText(dialogbox,"Alignez les écrous au milieu pour ouvrir la porte.");
+            newText(dialogbox, "Alignez les écrous au milieu pour ouvrir la porte.");
+
+            const timer = document.createElement("p"); timer.id = "timer"; timer.innerHTML = "15";
+            document.body.appendChild(timer);
+            while (playing) {
+                await sleep(1000);
+                timer.innerHTML = (timer.innerHTML - 1).toString();
+                if (timer.innerHTML === "11") {
+                    async function tenSec() {
+                        while (timer.innerHTML > 4) {
+                            await sleep(1000);
+                            timer.style.color = "red";
+                            await sleep(1000);
+                            timer.style.color = "white";
+                        }
+                        while (playing) {
+                            timer.style.color = "red";
+                            await sleep(250);
+                            timer.style.color = "white";
+                            await sleep(250);
+                        }
+                    }
+                    tenSec();
+                }
+                if (timer.innerHTML === "0") {
+                    timer.innerHTML = "Temps écoulé !"
+                    timer.style.color = "red";
+                    playing = false;
+                    perdu = true;
+                }
+            }
+            if (perdu) gameOver();
+
         }
 
         // ecrou aligné?
         let alignes = [false, true, false, false, false];
-        
+
         const ranges = document.querySelectorAll("input");
         ranges.forEach(range => {
             range.onchange = async () => {
                 if (range.value == 5) {
-                range.disabled = true;
-                alignes[(range.id)] = true;
-            } else {
-                alignes[(range.id)] = false;
-            }
+                    range.disabled = true;
+                    alignes[(range.id)] = true;
+                } else {
+                    alignes[(range.id)] = false;
+                }
 
-            let compteur = 0;
-            alignes.forEach(element => {
-                if (element) compteur++;
-            });
+                let compteur = 0;
+                alignes.forEach(element => {
+                    if (element) compteur++;
+                });
 
-            if (compteur == 5) {
-                const target = document.getElementById("target");
-                target.style.zIndex = 1;
-                target.style.outline = "solid white 2px";
-                dialogbox = resetDialogue(dialogbox, "side");
-                img = Image(true, "side", "Img1")
-                await newText(dialogbox, "Mouais pas mal, je pensais pas que tu réussirais.."); await sleep(1000);
-                await newText(dialogbox, "Voici la suite");
-                var suite = newButton(dialogbox, "Passer à la suite");
-                suite.onclick = () => document.location = "mission2.html"
-            }
+                if (compteur == 5) {
+                    playing = false;
+                    const target = document.getElementById("target");
+                    target.style.zIndex = 1;
+                    target.style.outline = "solid white 2px";
+                    dialogbox = resetDialogue(dialogbox, "side");
+                    img = Image(true, "side", "Img1")
+                    await newText(dialogbox, "Mouais pas mal, je pensais pas que tu réussirais.."); await sleep(1000);
+                    await newText(dialogbox, "Voici la suite");
+                    var suite = newButton(dialogbox, "Passer à la suite");
+                    suite.onclick = () => document.location = "mission2.html"
+                }
             }
         });
 
@@ -93,6 +128,10 @@
 </body>
 
 <style>
+    body {
+        display: flex;
+    }
+
     #main {
         width: 50%;
         height: calc(5*75px);
@@ -154,6 +193,15 @@
         height: 75px;
         background: rgb(150, 120, 0);
         cursor: pointer;
+    }
+
+    #timer {
+        font-size: 35px;
+        width: 300px;
+        position: absolute;
+        left: 100%;
+        transform: translate(-110%);
+        text-align: right;
     }
 </style>
 
