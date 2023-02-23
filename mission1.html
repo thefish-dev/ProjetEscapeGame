@@ -47,12 +47,12 @@
 
         // départ
         async function start() {
-            Image(img, true, "side", "Img1")
-            Dialogue(dialogbox, true, "side");
+            dialogbox = Dialogue(true, "side");
+            img = Image(true, "side", "Img1")
             await newText(dialogbox,"Dans ce cas tentez d'ouvrir cette porte, même si c'est impossible, haha !"); await sleep(1000);
             await newText(dialogbox,"Réussissez avant le temps imparti pour passer à la suite."); await sleep(500);
-            resetDialogue(dialogbox,"main");
-            Image(img, false);
+            dialogbox = resetDialogue(dialogbox,"main");
+            img = Image(img, false);
             newText(dialogbox,"Alignez les écrous au milieu pour ouvrir la porte.");
         }
 
@@ -75,8 +75,8 @@
                 const target = document.getElementById("target");
                 target.style.zIndex = 1;
                 target.style.outline = "solid white 2px";
-                resetDialogue(dialogbox, "side");
-                Image(img, true, "side", "Img1")
+                dialogbox = resetDialogue(dialogbox, "side");
+                img = Image(true, "side", "Img1")
                 await newText(dialogbox, "Mouais pas mal, je pensais pas que tu réussirais mais bon.."); await sleep(1000);
                 await newText(dialogbox, "Voici la suite");
                 var suite = newButton(dialogbox, "Passer à la suite");

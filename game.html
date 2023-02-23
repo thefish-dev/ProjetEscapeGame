@@ -21,11 +21,11 @@
 		let img
 
 		async function start() {
-			Dialogue(dialogbox, true, "main");
-			Image(img, true, "main", "Img1");
+			dialogbox = Dialogue(true, "main");
+			img = Image(true, "main", "Img1");
 			await newText(dialogbox, "Bonjour et bienvenu dans mon organisation, gniahaha !");
 			await sleep(500);
-			Image(img, true, "main", "Img2");
+			img = Image(true, "main", "Img2");
 			await newText(dialogbox, "Êtes-vous prêt à me défier ?");
 			var button = newButton(dialogbox, "Oui, absolument !");
 			button.onclick = () => document.location = "mission1.html";

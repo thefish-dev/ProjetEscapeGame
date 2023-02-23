@@ -19,28 +19,30 @@ export async function gameOver() {
 
 
 // nouveau dialogue ou détruit le dialogue
-export function Dialogue(dialogbox, state, type ) {
+export function Dialogue( state, type ) {
     if (state) {
-        dialogbox = document.createElement("div");
+        const dialogbox = document.createElement("div");
         dialogbox.id = `dialog-${type}`;
         document.body.appendChild(dialogbox);
-    } else dialogbox.remove();
+        return dialogbox;
+    } else type.remove(); // type va être la dialogbox
 }
 export function resetDialogue(dialogbox, type) {
-    Dialogue(dialogbox, false); Dialogue(dialogbox, true, type);
+    Dialogue(false, dialogbox); return Dialogue( true, type);
 }
 
 // nouvelle image ou détruit l'image
-export function Image(img, state, type, image) {
+export function Image(state, type, image) {
     if (state) {
-        img = document.createElement("img");
+        const img = document.createElement("img");
         img.id = `img-${type}`;
         img.src = `images/${image}.png`
         document.body.appendChild(img);
-    } else img.remove();
+        return img
+    } else type.remove(); // même chose
 }
 export function resetImg(img, type) {
-    Image(img, false); Image(img, true, type);
+    Image(false, img); return Image( true, type );
 }
 // créé un paragraphe dans le dialogue
 export async function newText(dialogbox, textContent) {
