@@ -44,20 +44,23 @@
         let dialogbox
         // image dans laquelle notre acteur sera affiché
         let img
-        
+
+        const ranges = document.querySelectorAll("input");
+        ranges.forEach(range => {range.disabled = true;});
         // départ
         let playing = true;
         let perdu = false;
         async function start() {
             dialogbox = Dialogue(true, "side");
             img = Image(true, "side", "Img1")
-            await newText(dialogbox, "Dans ce cas tentez d'ouvrir cette porte, même si c'est impossible, haha !"); await sleep(1000);
+            await newText(dialogbox, "Tentez d'ouvrir cette porte, même si c'est impossible, haha !"); await sleep(1000);
             await newText(dialogbox, "Réussissez avant le temps imparti pour passer à la suite."); await sleep(500);
             dialogbox = resetDialogue(dialogbox, "main");
             img = Image(img, false);
             newText(dialogbox, "Alignez les écrous au milieu pour ouvrir la porte.");
+        ranges.forEach(range => {range.disabled = false;});
 
-            const timer = document.createElement("p"); timer.id = "timer"; timer.innerHTML = "15";
+            const timer = document.createElement("p"); timer.id = "timer"; timer.innerHTML = "30";
             document.body.appendChild(timer);
             while (playing) {
                 await sleep(1000);
@@ -87,13 +90,12 @@
                 }
             }
             if (perdu) gameOver();
-
+            else timer.style.display = "none";
         }
 
         // ecrou aligné?
         let alignes = [false, true, false, false, false];
 
-        const ranges = document.querySelectorAll("input");
         ranges.forEach(range => {
             range.onchange = async () => {
                 if (range.value == 5) {
@@ -128,10 +130,6 @@
 </body>
 
 <style>
-    body {
-        display: flex;
-    }
-
     #main {
         width: 50%;
         height: calc(5*75px);

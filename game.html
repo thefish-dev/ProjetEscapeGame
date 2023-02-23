@@ -13,7 +13,7 @@
 
 <body>
 	<script type="module">
-		import { sleep, Dialogue, Image, newButton, newText } from './index.js';
+		import { sleep, Dialogue, Image, newButton, newText, resetImage } from './index.js';
 
 		// div dans lequel le dialog se passera
 		let dialogbox
@@ -25,6 +25,7 @@
 			img = Image(true, "main", "Img1");
 			await newText(dialogbox, "Bonjour et bienvenu dans mon organisation, gniahaha !");
 			await sleep(500);
+			img = resetImg(img, "main");
 			img = Image(true, "main", "Img2");
 			await newText(dialogbox, "Êtes-vous prêt à me défier ?");
 			var button = newButton(dialogbox, "Oui, absolument !");
