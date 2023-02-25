@@ -74,7 +74,7 @@
                             input2.onkeydown = async (event) => {
                                 if (event.key == "Enter" && input2.value != "") {
                                     input.disabled = true;
-                                    if (input2.value.toLocaleLowerCase == "le grand arthur") {
+                                    if (input2.value == "Le Grand Arthur") {
                                         await newText(dialogbox, "Effectivement, bien joué!"); await sleep(500);
                                         await newText(dialogbox, "Cette fois-ci le 5e numéro de la combinaison est 8"); await sleep(1500);
                                         await newText(dialogbox, "Tu vas pouvoir passer à la mission ultime."); await sleep(1000);
@@ -82,7 +82,7 @@
                                         const suite = newButton(dialogbox, "Mission ultime (Mission 6)");
                                         suite.onclick = () => document.location = "mission6.html";
                                     } else {
-                                        await newText(dialogbox, "Mais non! C'était 'LeGrandArthur'"); await sleep(500);
+                                        await newText(dialogbox, "Mais non! C'était 'Le Grand Arthur'"); await sleep(500);
                                         await newText(dialogbox, "Bon tanpis, j'avais commencé à m'attacher à toi jeune visiteur!"); await sleep(1000);
                                         await newText(dialogbox, "Je pensais qu'on pourrait jouer à League of Legends ensemble :("); await sleep(1500);
                                         gameOver();
