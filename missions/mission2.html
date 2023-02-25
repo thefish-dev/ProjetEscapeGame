@@ -10,13 +10,29 @@
     <title>Escape from Russia : Mission 2</title>
 </head>
 
+<style>
+    body{background:black}
+    *{color:white;}
+    .button{background:rgb(50,50,50); width:100px;height:100px; cursor:pointer;}
+    .button:hover{outline: solid white 2px;}
+    .info{background:rgb(50,50,50); width:100px;height:30px;font-size: small;cursor:pointer;}
+    .info:hover{outline: solid rgb(200,200,200) 1px;}
+    #container{
+        display: flex;
+        margin: 25px;
+        justify-content: space-between;
+    }
+</style>
+
 <body>
     <h1 id="titre"></h1>
     <h2 id="h2"></h2>
     <h2 id="h22"></h2>
     <h2 id="h222"></h2>
     <h2 id="h2222"></h2>
+    <div id="container"></div>
     <script>
+        const container = document.getElementById("container");
         var perdu = 0;
         var niveau2 = 0;
         var niveau3 = 0;
@@ -33,9 +49,9 @@
         }
         newText("Réappuis sur les bons carrés, il y aura 3 niveau, si tu y parviens le numero 2 de la combinaison te sera join", "titre");
         async function Start(button) {
-            button.style.background = "rgb(100,100,100)";
+            button.style.background = "rgb(170,0,0)";
             await sleep(500);
-            button.style.background = "white";
+            button.style.background = "rgb(50,50,50)";
         }
         /*affiche les carrés de couleur du niveau 1 */
         async function Main() {
@@ -48,11 +64,10 @@
             await sleep(500);
         }
         /*fonction qui quand on clique sur un carré change sa couleur pdt trés peut de temps */
-        async function bouttonckick(id) {
-            id.style.background = "rgb(0,255,255)"
-            await sleep(100);
-            id.style.background = "white"
-
+        async function bouttonckick(button) {
+            button.style.background = "rgb(100,100,100)";
+            await sleep(200);
+            button.style.background = "rgb(50,50,50)";
         }
         /*affiche les carrés de couleur du niveau 2 */
         async function Main2() {
@@ -89,8 +104,8 @@
         }
         var button1 = document.createElement('button');
         button1.id = 'button1';
-        var texte = document.createTextNode('Compris');
-        button1.appendChild(texte);
+        button1.className = "info";
+        button1.innerHTML = "Compris";
         document.body.appendChild(button1);
         /*je crée une list de longueur 3 lorsque l'on clique sur un carré, le compteur est égale à compteur +1, et la list d'indice*/
         /*compteur est égale au numero du boutton*/
@@ -99,45 +114,48 @@
         var h = 0;
         /*lorsque le boutton est cliqué le jeu commence et il change de prénom, il s'appele maintenant boutton 1*/
         button1.onclick = function () {
-            button1.innerHTML = "button1";
+            button1.innerHTML = ""
+            button1.className = "button";
+            container.appendChild(button1);
             var button2 = document.createElement('button');
             button2.id = 'button2';
-            var texte = document.createTextNode('button2');
-            button2.appendChild(texte);
-            document.body.appendChild(button2);
+            button2.className = "button";
+            container.appendChild(button2);
             var button3 = document.createElement('button');
             button3.id = 'button3';
-            var texte = document.createTextNode('button3');
-            button3.appendChild(texte);
-            document.body.appendChild(button3);
+            button3.className = "button";
+            container.appendChild(button3);
             /*on fait clignoter les bouttons du niveau1*/
             Main();
-            button1.onclick = function () {
-                bouttonckick(button1)
+            button1.onclick = async () => {
+                bouttonckick(button1);
                 list[compteur] = 1;
                 compteur = compteur + 1;
-                console.log(compteur)
-                console.log(list)
+                console.log(compteur);
+                console.log(list);
+                await sleep(300);
                 if (compteur == 3) {
-                    alert("perdu")
+                    alert("perdu");
                 }
             }
-            button3.onclick = function () {
+            button3.onclick = async () => {
                 bouttonckick(button3)
                 list[compteur] = 3;
                 compteur = compteur + 1;
                 console.log(compteur)
                 console.log(list)
+                await sleep(300);
                 if (compteur == 3) {
                     alert("perdu")
                 }
             }
-            button2.onclick = function () {
+            button2.onclick = async () => {
                 bouttonckick(button2)
                 list[compteur] = 2;
                 compteur = compteur + 1;
                 console.log(compteur)
                 console.log(list)
+                await sleep(300);
                 /*ici on crée la liste que l'on est censé obtenir, on les compard de la ligne 137 à 149, je stock l'indice de chaque liste*/
                 /*je stock chaque élement de liste qui on le meme indice je les compare, si ils sont égaux cp est égale à cp +1*/
                 /*à la fin si cp est égale au nombr d'élement qu'il y a dans la liste alors il russi l'étape et passe à la suite*/
@@ -170,65 +188,71 @@
                         alert("bien joué vous avez réussi l'étape 1");
                         var s = document.createElement('button');
                         s.id = 'suite';
-                        var texte = document.createTextNode('suite');
-                        s.appendChild(texte);
+                        s.innerHTML = "Suite";
+                        s.className = "info";
                         document.body.appendChild(s);
                         suite.onclick = function () {
                             /*ici je rajoutte les nouveaux bouttons*/
-                            s.innerHTML = "button4";
+                            s.innerHTML = "";
                             s.id = 'button4';
+                            s.className = "button";
+                            container.appendChild(s)
                             var button5 = document.createElement('button');
                             button5.id = 'button5';
-                            var texte = document.createTextNode('button5');
-                            button5.appendChild(texte);
-                            document.body.appendChild(button5);
+                            button5.className = "button";
+                            container.appendChild(button5);
                             /*on fait clignoter les boutton du niveau 2*/
                             Main2();
                             /*ici on refait la méme chose mais avec plus de boutton et donc un niveau plus difficile*/
                             var list2 = [0, 0, 0, 0, 0];
                             var compteur2 = 0;
-                            button1.onclick = function () {
+                            button1.onclick = async () =>{
                                 bouttonckick(button1)
                                 list2[compteur2] = 1;
                                 compteur2++
-                                console.log(list2)
+                                console.log(list2);
+                                await sleep(300);
                                 if (compteur2 == 5) {
                                     alert("perdu")
                                 }
                             }
-                            button3.onclick = function () {
+                            button3.onclick = async () =>{
                                 bouttonckick(button3)
                                 list2[compteur2] = 3;
                                 compteur2++
-                                console.log(list2)
+                                console.log(list2);
+                                await sleep(300);
                                 if (compteur2 == 5) {
                                     alert("perdu")
                                 }
                             }
-                            button4.onclick = function () {
+                            button4.onclick = async () =>{
                                 bouttonckick(button4)
                                 list2[compteur2] = 4;
                                 compteur2++
-                                console.log(list2)
+                                console.log(list2);
+                                await sleep(300);
                                 if (compteur2 == 5) {
                                     alert("perdu")
                                 }
 
                             }
-                            button5.onclick = function () {
+                            button5.onclick = async () =>{
                                 bouttonckick(button5)
                                 list2[compteur2] = 5;
                                 compteur2++
-                                console.log(list2)
+                                console.log(list2);
+                                await sleep(300);
                                 if (compteur2 == 5) {
                                     alert("perdu")
                                 }
                             }
-                            button2.onclick = function () {
+                            button2.onclick = async () =>{
                                 bouttonckick(button2)
                                 list2[compteur2] = 2;
                                 compteur2++
-                                console.log(list2)
+                                console.log(list2);
+                                await sleep(300);
                                 /*ici on crée la liste que l'on est censé obtenir, on les compard de la ligne 137 à 149, je stock l'indice de chaque liste*/
                                 /*je stock chaque élement de liste qui on le meme indice je les compare, si ils sont égaux cp est égale à cp +1*/
                                 /*à la fin si cp est égale au nombr d'élement qu'il y a dans la liste alors il russi l'étape et passe à la suite*/
@@ -261,83 +285,101 @@
                                     if (cp2 == 5) {
                                         var valider = document.createElement('button');
                                         valider.id = 'valider';
-                                        var texte = document.createTextNode('valider');
-                                        valider.appendChild(texte);
+                                        valider.innerHTML = "Valider";
+                                        valider.className = "info";
                                         document.body.appendChild(valider);
-                                        valider.onclick = function () {
-
-
-
+                                        valider.onclick = async () => {
+                                            
                                             alert('bien joué vous avez réussi l etape 2')
                                             niveau3 = 1;
                                             newText("Ceci est le niveau ultime bonne chance", "h22")
                                             /*ici on rajoutte les nouveaux bouttons*/
-                                            valider.innerHTML = "button6";
+                                            valider.innerHTML = "";
                                             valider.id = 'button6';
-
+                                            valider.className = "button";
+                                            container.appendChild(valider)
 
                                             var button7 = document.createElement('button');
                                             button7.id = 'button7';
-                                            var texte = document.createTextNode('button7');
-                                            button7.appendChild(texte);
-                                            document.body.appendChild(button7);
+                                            button7.className = "button";
+                                            container.appendChild(button7);
+                                            var button8 = document.createElement('button');
+                                            button8.id = 'button8';
+                                            button8.className = "button";
+                                            container.appendChild(button8);
                                             /*on fait clignoter les bontton du niveau 3*/
                                             Main3();
                                             var compteur3 = 0;
                                             var list3 = [0, 0, 0, 0, 0, 0, 0];
 
-                                            button2.onclick = function () {
+                                            button2.onclick = async () => {
                                                 list3[compteur3] = 2;
                                                 compteur3++;
                                                 bouttonckick(button2);
+                                                await sleep(300);
                                                 if (compteur3 == 7) {
                                                     alert("perdu");
                                                 }
                                             }
-                                            button3.onclick = function () {
+                                            button3.onclick = async () => {
                                                 list3[compteur3] = 3;
                                                 compteur3++;
                                                 bouttonckick(button3);
+                                                await sleep(300);
                                                 if (compteur3 == 7) {
                                                     alert("perdu");
                                                 }
                                             }
-                                            button4.onclick = function () {
+                                            button4.onclick = async () => {
                                                 list3[compteur3] = 4;
                                                 compteur3++;
                                                 bouttonckick(button4);
+                                                await sleep(300);
                                                 if (compteur3 == 7) {
                                                     alert("perdu");
                                                 }
                                             }
-                                            button5.onclick = function () {
+                                            button5.onclick = async () => {
                                                 list3[compteur3] = 5;
                                                 compteur3++;
                                                 bouttonckick(button5);
+                                                await sleep(300);
                                                 if (compteur3 == 7) {
                                                     alert("perdu");
                                                 }
                                             }
-                                            button6.onclick = function () {
+                                            button6.onclick = async () => {
                                                 list3[compteur3] = 6;
                                                 compteur3++;
                                                 bouttonckick(button6);
+                                                await sleep(300);
                                                 if (compteur3 == 7) {
                                                     alert("perdu");
                                                 }
                                             }
-                                            button7.onclick = function () {
+                                            button7.onclick = async () => {
                                                 bouttonckick(button7);
                                                 list3[compteur3] = 7;
                                                 compteur3++;
+                                                await sleep(300);
                                                 if (compteur3 == 7) {
                                                     alert("perdu");
                                                 }
                                             }
-                                            button1.onclick = function () {
+                                            button8.onclick = async () => {
+                                                bouttonckick(button8);
+                                                list3[compteur3] = 7;
+                                                compteur3++;
+                                                await sleep(300);
+                                                if (compteur3 == 7) {
+                                                    alert("perdu");
+                                                }
+                                            }
+                                            button1.onclick = async () => {
                                                 bouttonckick(button1)
                                                 list3[compteur3] = 1;
                                                 compteur3++
+                                                await sleep(300);
                                                 /*ici on crée la liste que l'on est censé obtenir, on les compard de la ligne 137 à 149, je stock l'indice de chaque liste*/
                                                 /*je stock chaque élement de liste qui on le meme indice je les compare, si ils sont égaux cp est égale à cp +1*/
                                                 /*à la fin si cp est égale au nombr d'élement qu'il y a dans la liste alors il russi l'étape et passe à la suite*/
