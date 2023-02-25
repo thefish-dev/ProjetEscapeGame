@@ -51,8 +51,10 @@
             const button = newButton(dialogbox, "C'est parti");
 
             button.onclick = async () => {
-                dialogbox = resetDialogue(dialogbox, "main")
-                let phrase = "Le Grand Arthur est l'être suprème de la beauté et du charisme.";
+                dialogbox = resetDialogue(dialogbox, "main");
+
+                let phrase = "Le Grand Arthur est l'être suprême de la beauté et du charisme.";
+                
                 newText(dialogbox, phrase);
                 document.getElementById("overlay").style.display = "block";
                 const input = newInput(dialogbox, "Le Grand Arthur...");
@@ -72,7 +74,7 @@
                             input2.onkeydown = async (event) => {
                                 if (event.key == "Enter" && input2.value != "") {
                                     input.disabled = true;
-                                    if (input2.value = "Le Grand Arthur") {
+                                    if (input2.value.toLocaleLowerCase == "le grand arthur") {
                                         await newText(dialogbox, "Effectivement, bien joué!"); await sleep(500);
                                         await newText(dialogbox, "Cette fois-ci le 5e numéro de la combinaison est 8"); await sleep(1500);
                                         await newText(dialogbox, "Tu vas pouvoir passer à la mission ultime."); await sleep(1000);
