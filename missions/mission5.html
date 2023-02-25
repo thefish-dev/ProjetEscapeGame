@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Demet LE GAL">
+    <meta name="co-founder" content="Louis BRYNIDSVOL-GIARD">
+    <link rel="icon" type="image/x-icon" href="images/icon.png">
+
+    <title>Escape from Russia : Mission 3</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <div id="main">
+
+    </div>
+    <div id="overlay"></div>
+    <div id="game-over">
+        <div id="text">
+            <h1>Game over!</h1>
+            <p>
+                Tu as perdu, quel surprise! <br/> Non je plasante, je m'y attendais enfaite >:)
+            </p>
+        </div>
+        <div id="buttons">
+            <a id="button" href="../game.html">Recommencer</button>
+            <a id="button" href="../index.html">Menu</a>
+        </div>
+
+    </div>
+
+    <script type="module">
+        import { sleep, Dialogue, Image, newButton, newText, resetDialogue, gameOver } from '../index.js';
+
+        // div dans lequel le dialog se passera
+        let dialogbox
+        let img
+        let playing = true;
+        let perdu = false;
+        // départ
+        async function start() {
+            dialogbox = Dialogue(true, "main");
+            img = Image(true, "main", "Img1");
+            await newText(dialogbox, "Fort bien, fort bien."); await sleep(250);
+            await newText(dialogbox, "Il est désormais temps de passer au choses sérieuses !"); await sleep(1000);
+            await newText(dialogbox, "Si vous êtes un vrai geek, vous devriez pouvoir écrire vite au clavier, n'est-ce pas?"); await sleep(2000);
+            await newText(dialogbox, "Et bien c'est ce que nous allons voir"); await sleep(500);
+            await newText(dialogbox, "Vous allez devoir réécrire la phrase suivante le plus vite possible !"); await sleep(1000);
+            await newText(dialogbox, "Vous êtes prêt?");
+            const button = newButton(dialogbox, "C'est parti");
+
+            button.onclick = async () => {
+                dialogbox = resetDialogue(dialogbox, "main")
+                let phrase = "Le Grand Arthur est l'être suprème de la beauté et du charisme.";
+                newText(dialogbox, phrase);
+                document.getElementById("overlay").style.display = "block";
+                const input = newInput(dialogbox, "Le Grand Arthur...");
+                input.focus();
+                input.onkeydown = async (event) => {
+                    if (event.key == "Enter" && input.value != "") {
+                        document.getElementById("overlay").style.display = "none";
+                        input.disabled = true;
+                        if (input.value === phrase) {
+                            playing = false;
+                            await newText(dialogbox, "Bien joué, tu es très doué je dois l'admettre !"); await sleep(500);
+                            await newText(dialogbox, "Mais dis moi, n'as-tu pas remarqué quelque chose de puis tout-à-l'heure?"); await sleep(1000);
+                            dialogbox = resetDialogue(dialogbox, "main");
+                            await newText(dialogbox, "Qu'est-ce qui est beau et qui se trouve dans presque chaque pièce de cet endroit?");
+                            const input2 = newInput(dialogbox, "Bonne question..");
+                            input2.focus()
+                            input2.onkeydown = async (event) => {
+                                if (event.key == "Enter" && input2.value != "") {
+                                    input.disabled = true;
+                                    if (input2.value = "Le Grand Arthur") {
+                                        await newText(dialogbox, "Effectivement, bien joué!"); await sleep(500);
+                                        await newText(dialogbox, "Cette fois-ci le 5e numéro de la combinaison est 8"); await sleep(1500);
+                                        await newText(dialogbox, "Tu vas pouvoir passer à la mission ultime."); await sleep(1000);
+                                        await newText(dialogbox, "Je te souhaite du courage, franchement !"); await sleep(1000);
+                                        const suite = newButton(dialogbox, "Mission ultime (Mission 6)");
+                                        suite.onclick = () => document.location = "mission6.html";
+                                    } else {
+                                        await newText(dialogbox, "Mais non! C'était 'LeGrandArthur'"); await sleep(500);
+                                        await newText(dialogbox, "Bon tanpis, j'avais commencé à m'attacher à toi jeune visiteur!"); await sleep(1000);
+                                        await newText(dialogbox, "Je pensais qu'on pourrait jouer à League of Legends ensemble :("); await sleep(1500);
+                                        gameOver();
+                                    }
+                                }
+                            }
+
+                        } else {
+                            playing = false;
+                            img = resetImg(img, "main");
+
+                            await newText(dialogbox, "Et bien non, tu as fais des fautes!"); await sleep(500);
+                            await newText(dialogbox, "Tu avais un seul essai, cela me paraissait evident pourtant"); await sleep(1500);
+                            await newText(dialogbox, "On est pas tous issu du même milieu en même temps, je peux comprendre."); await sleep(2000);
+                            gameOver();
+                        }
+                    }
+                }
+                await sleep(1000);
+                const timer = document.createElement("p"); timer.id = "timer"; timer.innerHTML = "20";
+                document.body.appendChild(timer);
+                while (playing) {
+                    await sleep(1000);
+                    timer.innerHTML = (timer.innerHTML - 1).toString();
+                    if (timer.innerHTML === "11") {
+                        async function tenSec() {
+                            while (timer.innerHTML > 4) {
+                                await sleep(1000);
+                                timer.style.color = "red";
+                                await sleep(1000);
+                                timer.style.color = "white";
+                            }
+                            while (playing) {
+                                timer.style.color = "red";
+                                await sleep(250);
+                                timer.style.color = "white";
+                                await sleep(250);
+                            }
+                        }
+                        tenSec();
+                    }
+                    if (timer.innerHTML === "0") {
+                        timer.innerHTML = "Temps écoulé !"
+                        timer.style.color = "red";
+                        playing = false;
+                        perdu = true;
+                    }
+                }
+                if (perdu) gameOver();
+                else timer.style.display = "none";
+            }
+        }
+        start()
+    </script>
+</body>
+
+<style>
+    #timer {
+        font-size: 35px;
+        width: 300px;
+        position: absolute;
+        left: 100%;
+        transform: translate(-110%);
+        text-align: right;
+    }
+</style>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Demet LE GAL">
+    <meta name="co-founder" content="Louis BRYNIDSVOL-GIARD">
+    <link rel="icon" type="image/x-icon" href="images/icon.png">
+
+    <title>Escape from Russia : Mission Ultime</title>
+</head>
+
+<body>
+    <h1 id='h1'></h1>
+    <h2 id='h2'></h2>
+    <h2 id='h22'></h2>
+    <h2 id='h222'></h2>
+    <h2 id='h2222'></h2>
+    <h2 id='hfinale'></h2>
+    <script>
+        /*creation d'une certaine boite de dialog jusqu'a la ligne 46*/
+        async function message(msg) {
+            var m = document.createElement("p");
+            m.id = "message";
+            m.innerHTML = msg;
+            document.body.appendChild(m);
+            m.onclick = function () {
+                m.remove();
+
+            }
+        }
+        let dialogbox = document.createElement("div");
+        dialogbox.id = "dialog";
+        document.body.appendChild(dialogbox);
+
+        // nouveau dialogue
+        function newDialog() {
+            dialogbox.remove();
+            dialogbox = document.createElement("div");
+            dialogbox.id = "dialog";
+            document.body.appendChild(dialogbox);
+        }
+        function newInput(placeHolder) {
+            var input = document.createElement("input");
+            input.placeholder = placeHolder;
+            input.id = "dialog-input";
+            dialogbox.appendChild(input);
+            return input
+        }
+
+
+
+
+        var reponse = "0";
+        var a = 0;
+        var perdu = 0;
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        /*fonction qui affiche un texte en fonction de son id*/
+        async function newText(textContent, id) {
+            var text = document.getElementById(id);
+            for (let i = 0; i < textContent.length; i++) {
+                await sleep(25);
+                text.innerHTML += textContent[i];
+            }
+        }
+
+        newText("Ceci est la derniére énigme, si tu y arrive alors tu pourras sortirmais c'est compliqué", "h1")
+        sleep(4000)
+        /*création d'un boutton compris*/
+        var cp = document.createElement('button');
+        cp.id = 'compris';
+        var texte = document.createTextNode('compris ?');
+        cp.appendChild(texte);
+        document.body.appendChild(cp);
+
+        compris.onclick = function () {
+            /*au fur et à mesure que l'on appuis sur compris, on explique un peu plus pour éviter d'ettouffer le perssonnage d'info*/
+            if (a == 0) {
+                newText("Tout d'abord rappeler vous du seul élement présent dans toute les missions, ensuite trouver son emplacement dans l'alphabet,c'est la clé", "h2")
+                var cp = document.createElement('button')
+                a = a + 1
+
+            }
+            else if (a == 1) {
+                newText('MOI ARTHUR JE SERAIS CHEFO', 'h22')
+                newText('Oh tient une phrase code pour chaque lettre ajouter la clé, si celle si dépasse 26 alors vous enlever 26, on dit souvent que cette encodage ressemble à celui de vigenere mais La chef le nie', 'h222')
+                a = a + 1;
+
+
+            }
+            else if (a == 2) {
+                newText("Prener l'emplacement de chaque lettre du language codée, faite une moyenne et enlever le chiffre 7", "h2222")
+                a = a + 1;
+            }
+            else if (a == 3) {
+                /*creation d'une boite de dialog entre le joueur et la machine, si il répond correctement alors*/
+                /*alors la machine lui donne la derniére combinaison*/
+                var rps = newInput("saisir");
+                rps.onkeydown = async (event) => {
+                    if (event.key == "Enter") {
+
+                        rps.disabled = true;
+                        if (rps.value == '6') {
+                            alert('vous avez gagné, le chiffre de la derniére combinaison est 7, retenez le')
+                        }
+                        else {
+                            rps.remove();
+                            newText('Dommage, il vous reste un essaie', 'hfinale')
+                            var rps2 = newInput("saisir");
+                            rps2.onkeydown = async (event) => {
+                                if (event.key == "Enter") {
+
+                                    rps2.disabled = true;
+                                    if (rps2.value == '6') {
+                                        alert('vous avez gagné, le chiffre de la derniére combinaison est 7, retenez le bien!')
+                                        document.location = "codefinal";
+                                    }
+
+                                    else {
+                                        alert("Vous avez definitivement perdu")
+                                        a++;
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

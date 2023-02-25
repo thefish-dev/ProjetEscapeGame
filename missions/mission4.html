@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #message {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        width: 50%;
+        height: 100px;
+        z-index: 1;
+        display: block;
+        background: black;
+        color: white;
+        top: 80%;
+
+
+    }
+</style>
+
+<body>
+    <h1 id="titre"></h1>
+    <h2 id="exp"></h2>
+    <h2 id="h3"></h2>
+    <h2 id="h33"></h2>
+    <h2 id='h9'></h2>
+    <h2 id='hf'></h2>
+    <h2 id='hf2'></h2>
+
+    <button id="button1">Compris ?</button>
+
+    <script>
+        /*création d'une fonction mission 4 pour pouvoir utiliser la fonction await*/
+        async function mission4() {
+            /*création d'une fonction message similaire à alert mais qui ne coupe rien*/
+
+            async function message(msg) {
+                var m = document.createElement("p");
+                m.id = "message";
+                m.innerHTML = msg;
+                document.body.appendChild(m);
+                m.onclick = function () {
+                    m.remove();
+
+                }
+            }
+            /*creation d'une sorte de boite de dialogue jusqu'a la ligne 71*/
+            let dialogbox = document.createElement("div");
+            dialogbox.id = "dialog";
+            document.body.appendChild(dialogbox);
+
+            // nouveau dialogue
+            function newDialog() {
+                dialogbox.remove();
+                dialogbox = document.createElement("div");
+                dialogbox.id = "dialog";
+                document.body.appendChild(dialogbox);
+            }
+            function newInput(placeHolder) {
+                var input = document.createElement("input");
+                input.placeholder = placeHolder;
+                input.id = "dialog-input";
+                dialogbox.appendChild(input);
+                return input
+            }
+
+
+
+
+            var a = 0;
+
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+            /*fonction qui affiche un texte en fonction de son id*/
+            async function newText(textContent, id) {
+                var text = document.getElementById(id);
+                for (let i = 0; i < textContent.length; i++) {
+                    await sleep(25);
+                    text.innerHTML += textContent[i];
+                }
+            }
+            newText("Le chiffre dissimulé a la quatriéme combinaisons du code est caché derriére une suite de nombre transformé en binaire"
+                , "titre");
+            /*à chaque fois que l'on appuis sur compris on explique un peu plus pour ne pas innonder le joueur d'information*/
+            button1.onclick = async () => {
+                a = a + 1;
+                if (a == 1) {
+                    await newText("Tout d'abord souvenez vous de 01001110 en binaire en complement a 2", "exp")
+                }
+                else if (a == 2) {
+                    await newText("Maitenant prener sa valeur absolue et convertisser la en entier naturel binaire", "h33")
+                }
+                else if (a == 3) {
+                    await newText("La quatriéme chiffre de la combinaison correspond au nombre de 1 qu'il y a dans la façon d'écrire le nombre de 1 de l'écriture binaire que vous avez calculer si dzssus", "h9")
+                }
+                else if (a == 4) {
+                    /*grace au fonction crée precedemment on, on crée une boite de dialog pour que le joueur puisse*/
+                    /*repondre au question, il a deux chance, si il gagne, on lui donne la 4éme combinaison du code*/
+                    var rps = newInput("saisir");
+                    rps.onkeydown = async (event) => {
+                        if (event.key == "Enter") {
+
+                            rps.disabled = true;
+                            if (rps.value == '2') {
+                                message('Bien joué vous avez réussi, vous avez la quatriéme combinaison du code retenez la');
+                                await sleep(2000);
+                                const suite = document.createElement("button");
+                                suite.innerHTML = "Mission Suivante (5)"
+                                document.body.appendChild(suite);
+                                suite.onclick = () => document.location = "mission5.html";
+                            }
+                            else {
+                                rps.remove();
+                                newText('perdu il vous reste un essaie , dommage', 'hf2')
+                                var rps2 = newInput("saisir");
+                                rps2.onkeydown = async (event) => {
+                                    if (event.key == "Enter") {
+
+                                        rps2.disabled = true;
+                                        if (rps2.value == '2') {
+                                            message('Bien joué vous avez réussi, vous avez la quatriéme combinaison du code retenez la,c est 3')
+                                        }
+                                        else {
+                                            message('Vous avez definitivement perdu , dommage')
+
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+                            rps.onkeydown = async (event) => {
+                                if (event.key == "Enter") {
+
+                                    rps.disabled = true;
+                                    if (rps.value == '2') {
+                                        message('Bien joué vous avez réussi, vous avez la quatriéme combinaison du code retenez la')
+                                        await sleep(2000);
+                                        const suite = document.createElement("button");
+                                        suite.innerHTML = "Mission Suivante (5)"
+                                        document.body.appendChild(suite);
+                                        suite.onclick = () => document.location = "mission5.html";
+
+                                    }
+                                    else {
+                                        message('Vous avez définitivement perdu, dommage')
+                                    }
+
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+        mission4();
+    </script>
+
+</body>
+
+</html>

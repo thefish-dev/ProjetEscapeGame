@@ -8,7 +8,7 @@
     <link rel="icon" type="image/x-icon" href="images/icon.png">
 
     <title>Escape from Russia : Mission 1</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
@@ -27,18 +27,18 @@
         <div id="text">
             <h1>Game over!</h1>
             <p>
-
+                Tu as perdu, quel surprise! <br/> Non je plasante, je m'y attendais enfaite >:)
             </p>
         </div>
         <div id="buttons">
-            <button onclick="start();" id="button">Retry</button>
-            <a id="button" href="index.html">Home</a>
+            <a id="button" href="../game.html">Recommencer</button>
+            <a id="button" href="../index.html">Menu</a>
         </div>
 
     </div>
 
     <script type="module">
-        import { sleep, Dialogue, Image, newButton, newText, resetDialogue, gameOver } from './index.js';
+        import { sleep, Dialogue, Image, newButton, newText, resetDialogue, gameOver } from '../index.js';
 
         // div dans lequel le dialog se passera
         let dialogbox
@@ -46,7 +46,7 @@
         let img
 
         const ranges = document.querySelectorAll("input");
-        ranges.forEach(range => {range.disabled = true;});
+        ranges.forEach(range => { range.disabled = true; });
         // départ
         let playing = true;
         let perdu = false;
@@ -58,7 +58,7 @@
             dialogbox = resetDialogue(dialogbox, "main");
             img = Image(img, false);
             newText(dialogbox, "Alignez les écrous au milieu pour ouvrir la porte.");
-        ranges.forEach(range => {range.disabled = false;});
+            ranges.forEach(range => { range.disabled = false; });
 
             const timer = document.createElement("p"); timer.id = "timer"; timer.innerHTML = "30";
             document.body.appendChild(timer);
@@ -118,8 +118,11 @@
                     dialogbox = resetDialogue(dialogbox, "side");
                     img = Image(true, "side", "Img1")
                     await newText(dialogbox, "Mouais pas mal, je pensais pas que tu réussirais.."); await sleep(1000);
-                    await newText(dialogbox, "Voici la suite");
-                    var suite = newButton(dialogbox, "Passer à la suite");
+                    await newText(dialogbox, "Je vais te donner le premier numéro de la combinaison de fin"); await sleep(500);
+                    await newText(dialogbox, "Je te le donne parce que je sais que tu n'y arrivera jamais, mouahahaha"); await sleep(500);
+                    await newText(dialogbox, "Le voici, retiens-le bien! Ce numéro est le 2."); await sleep(1000);
+                    await newText(dialogbox, "Tu peux désormais passer à la suite");
+                    var suite = newButton(dialogbox, "Passer à la suite (Mission 2)");
                     suite.onclick = () => document.location = "mission2.html"
                 }
             }
