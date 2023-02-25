@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Demet LE GAL">
+    <meta name="co-founder" content="Louis BRYNIDSVOL-GIARD">
+    <link rel="icon" type="image/x-icon" href="images/icon.png">
+
+    <title>Escape from Russia : Fin</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <img id="russie" src="images/Russie.jpg">
+    <script>
+        import { sleep, Dialogue, Image, newText } from './index.js';
+        // div dans lequel le dialog se passera
+        let dialogbox
+        // image dans laquelle notre acteur sera affiché
+        let img
+
+        async function start() {
+            dialogbox = Dialogue(true, "main");
+            img = Image(true, "main", "Img1");
+            await newText(dialogbox, "Tu as tous réussi avec brio, je te félicite!");
+            await newText(dialogbox, "Mais juste pour être sûr..");
+            img = resetImg(img, "main");
+            img = Image(true, "main", "Img2");
+            await newText(dialogbox, "Qui est l'être suprême de cette Terre?");
+            const input = newInput(dialogbox, "Vous");
+            input.focus();
+            input.onkeydown = async (event) => {
+                if (input.value != "") {
+                    input.disabled = true;
+                    img = resetImg(img, "main");
+                    img = Image(true, "main", "Img1");
+                    await newText(dialogbox, "Je plaisante, tu peux y aller");
+                }
+            }
+        }
+        start()
+    </script>
+</body>
+
+<style>
+    #russie{
+        position: absolute;
+        z-index: -1;
+        width:100%;
+        height: 100%;
+    }
+</style>
+
+</html>
