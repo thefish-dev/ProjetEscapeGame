@@ -113,12 +113,12 @@
                                 if (event.key == "Enter") {
 
                                     rps2.disabled = true;
-                                    if (rps2.value == '6') {
-                                        alert("Félicitation, le 6e numéro de la combinaison est 7, j'espère que vous avez bien tout retenu!");
+                                    if (rps2.value == '6') {                                        
                                         const suite = document.createElement("button");
                                         suite.innerHTML = "Etape finale";
                                         suite.onclick = () => document.location = "codefinal.html";
                                         document.body.appendChild(suite);
+                                        alert("Félicitation, le 6e numéro de la combinaison est 7, j'espère que vous avez bien tout retenu!");
                                     }
 
                                     else {
