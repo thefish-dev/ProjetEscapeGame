@@ -115,9 +115,9 @@
                                     rps2.disabled = true;
                                     if (rps2.value == '6') {
                                         alert("Félicitation, le 6e numéro de la combinaison est 7, j'espère que vous avez bien tout retenu!");
-                                        const suite = document.createElement("a");
+                                        const suite = document.createElement("button");
                                         suite.innerHTML = "Etape finale";
-                                        suite.href = "codefinal.html";
+                                        suite.onclick = () => document.location = "codefinal.html";
                                         document.body.appendChild(suite);
                                     }
 
