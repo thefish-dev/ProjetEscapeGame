@@ -58,7 +58,7 @@
 
                 code1.disabled = true;
                 listcode[0] = code1.value;
-                a = a + 1
+                a++;
 
             }
         }
@@ -68,7 +68,7 @@
 
                 code2.disabled = true;
                 listcode[0] = code2.value;
-                a = a + 1
+                a++;
 
             }
         }
@@ -78,7 +78,7 @@
 
                 code3.disabled = true;
                 listcode[2] = code3.value;
-                a = a + 1
+                a++;
 
             }
         }
@@ -88,7 +88,7 @@
 
                 code4.disabled = true;
                 listcode[3] = code4.value;
-                a = a + 1
+                a++;
 
             }
         }
@@ -98,7 +98,7 @@
 
                 code5.disabled = true;
                 listcode[4] = code5.value;
-                a = a + 1
+                a++;
 
             }
         }
@@ -108,15 +108,14 @@
 
                 code6.disabled = true;
                 listcode[5] = code6.value;
-                a = a + 1
+                a++;
 
             }
         }
         //on crée un boutton valider
         var valider = document.createElement('button');
         valider.id = 'valider';
-        var texte = document.createTextNode('valider');
-        valider.appendChild(texte);
+        valider.innerHTML = "Valider";
         document.body.appendChild(valider);
         valider.onclick = function () {
             var a = 0;
