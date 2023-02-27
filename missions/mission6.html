@@ -103,7 +103,11 @@
 
                         rps.disabled = true;
                         if (rps.value == '6') {
-                            alert('vous avez gagné, le chiffre de la derniére combinaison est 7, retenez le')
+                            const suite = document.createElement("button");
+                                        suite.innerHTML = "Etape finale";
+                                        suite.onclick = () => document.location = "codefinal.html";
+                                        document.body.appendChild(suite);
+                            alert('vous avez gagné, le chiffre de la derniére combinaison est 7, retenez le');
                         }
                         else {
                             rps.remove();
