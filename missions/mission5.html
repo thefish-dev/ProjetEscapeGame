@@ -41,7 +41,7 @@
         // départ
         async function start() {
             dialogbox = Dialogue(true, "main");
-            img = Image(true, "main", "Img1");
+            img = Image(true, "main", "../images/Img1");
             await newText(dialogbox, "Fort bien, fort bien."); await sleep(250);
             await newText(dialogbox, "Il est désormais temps de passer au choses sérieuses !"); await sleep(1000);
             await newText(dialogbox, "Si vous êtes un vrai geek, vous devriez pouvoir écrire vite au clavier, n'est-ce pas?"); await sleep(2000);
@@ -102,6 +102,7 @@
                     }
                 }
                 await sleep(1000);
+                
                 const timer = document.createElement("p"); timer.id = "timer"; timer.innerHTML = "20";
                 document.body.appendChild(timer);
                 while (playing) {

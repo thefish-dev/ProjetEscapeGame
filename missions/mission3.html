@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="author" content="Demet LE GAL">
     <meta name="co-founder" content="Louis BRYNIDSVOL-GIARD">
-    <link rel="icon" type="image/x-icon" href="images/icon.png">
+    <link rel="icon" type="image/x-icon" href="../images/icon.png">
 
     <title>Escape from Russia : Mission 3</title>
     <link rel="stylesheet" href="../style.css">
@@ -39,7 +39,7 @@
         async function Input() {
             if (tentative < 2) {
                 img = resetImg(img, "main");
-                img = Image(true, "main", "Img1")
+                img = Image(true, "main", "../images/Img1")
                 await newText(dialogbox, "Donnes moi le nombre de la base10 du nombre base2 qui est 10100011");
                 const input = newInput(dialogbox, "Votre réponse..");
                 input.focus();
@@ -49,14 +49,14 @@
                         tentative++;
                         if (input.value == "9") {
                             img = resetImg(img, "main");
-                            img = Image(true, "main", "Img1")
+                            img = Image(true, "main", "../images/Img1")
                             await newText(dialogbox, "Hey bien joué! Vous avez désormais le 3e numéro de la combinaison !"); await sleep(500);
                             await newText(dialogbox, "On peut passer à la suite maintenant.");
                             const suite = newButton(dialogbox, "Mission Suivante (Mission 3)");
                             suite.onclick = () => document.location = "mission4.html";
                         } else {
                             img = resetImg(img, "main");
-                            img = Image(true, "main", "Img2")
+                            img = Image(true, "main", "../images/Img2")
                             await newText(dialogbox, `Et non, il te reste ${2 - tentative} tentative!`); await sleep(1000);
                             dialogbox = resetDialogue(dialogbox, "main");
                             Input();
@@ -65,7 +65,7 @@
                 }
             } else {
                 img = resetImg(img, "main");
-                img = Image(true, "main", "Img1")
+                img = Image(true, "main", "../images/Img1")
                 await newText(dialogbox, "C'était bien tenté mais tu as échoué"); await sleep(500);
                 gameOver();
             }
@@ -73,7 +73,7 @@
 
         async function start() {
             dialogbox = Dialogue(true, "main");
-            img = Image(true, "main", "Img1");
+            img = Image(true, "main", "../images/Img1");
             await newText(dialogbox, "Tu te débrouille bien finalement, mais réussiras-tu la mission suivante?"); await sleep(1000);
             await newText(dialogbox, "J'espère que tu connais bien les nombres binaires parce que tu en auras besoin!"); await sleep(1000);
             Input();

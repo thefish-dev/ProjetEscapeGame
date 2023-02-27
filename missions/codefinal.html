@@ -1,146 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="author" content="Demet LE GAL">
+    <meta name="co-founder" content="Louis BRYNIDSVOL-GIARD">
+    <link rel="icon" type="image/x-icon" href="../images/icon.png">
+
+    <title>Escape from Russia : Code Final</title>
 </head>
+
 <body>
-    <h2 id ="h2"></h2>
+    <h2 id="h2"></h2>
     <script>
-         function sleep(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
-         let dialogbox = document.createElement("div");
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        let dialogbox = document.createElement("div");
+        dialogbox.id = "dialog";
+        document.body.appendChild(dialogbox);
+
+        // nouveau dialogue
+        function newDialog() {
+            dialogbox.remove();
+            dialogbox = document.createElement("div");
             dialogbox.id = "dialog";
             document.body.appendChild(dialogbox);
+        }
+        /*fonction qui crée une case de saisie*/
+        function newInput(placeHolder) {
+            var input = document.createElement("input");
+            input.placeholder = placeHolder;
+            input.id = "dialog-input";
+            input.type = "number";
+            dialogbox.appendChild(input);
+            return input
+        }
+        /*fonction qui affiche un texte en fonction de son id*/
+        async function newText(textContent, id) {
+            var text = document.getElementById(id);
+            for (let i = 0; i < textContent.length; i++) {
+                await sleep(25);
+                text.innerHTML += textContent[i];
+            }
+        }
+        newText("Grace au mission précedente, écris la combinaison dans l'ordre des missions, une combinaison dans chaque cellule de saisis", "h2");
 
-            // nouveau dialogue
-            function newDialog() {
-                dialogbox.remove();
-                dialogbox = document.createElement("div");
-                dialogbox.id = "dialog";
-                document.body.appendChild(dialogbox);
+
+
+
+        //on crée une list qui sera crée en fonction des numéro taper dans chacun des input
+        var listcode = [0, 0, 0, 0, 0, 0];
+        var a = 0;
+        var code1 = newInput("saisir");
+        code1.onkeydown = async (event) => {
+            if (event.key == "Enter") {
+
+                code1.disabled = true;
+                listcode[0] = code1.value;
+                a = a + 1
+
             }
-            /*fonction qui crée une case de saisie*/
-            function newInput(placeHolder) {
-                var input = document.createElement("input");
-                input.placeholder = placeHolder;
-                input.id = "dialog-input";
-                input.type="number";
-                dialogbox.appendChild(input);
-                return input
+        }
+        var code2 = newInput("saisir");
+        code2.onkeydown = async (event) => {
+            if (event.key == "Enter") {
+
+                code2.disabled = true;
+                listcode[0] = code2.value;
+                a = a + 1
+
             }
-             /*fonction qui affiche un texte en fonction de son id*/
-             async function newText(textContent, id) {
-                var text = document.getElementById(id);
-                for (let i = 0; i < textContent.length; i++) {
-                    await sleep(25);
-                    text.innerHTML += textContent[i];
+        }
+        var code3 = newInput("saisir");
+        code3.onkeydown = async (event) => {
+            if (event.key == "Enter") {
+
+                code3.disabled = true;
+                listcode[2] = code3.value;
+                a = a + 1
+
+            }
+        }
+        var code4 = newInput("saisir");
+        code4.onkeydown = async (event) => {
+            if (event.key == "Enter") {
+
+                code4.disabled = true;
+                listcode[3] = code4.value;
+                a = a + 1
+
+            }
+        }
+        var code5 = newInput("saisir");
+        code5.onkeydown = async (event) => {
+            if (event.key == "Enter") {
+
+                code5.disabled = true;
+                listcode[4] = code5.value;
+                a = a + 1
+
+            }
+        }
+        var code6 = newInput("saisir");
+        code6.onkeydown = async (event) => {
+            if (event.key == "Enter") {
+
+                code6.disabled = true;
+                listcode[5] = code6.value;
+                a = a + 1
+
+            }
+        }
+        //on crée un boutton valider
+        var valider = document.createElement('button');
+        valider.id = 'valider';
+        var texte = document.createTextNode('valider');
+        valider.appendChild(texte);
+        document.body.appendChild(valider);
+        valider.onclick = function () {
+            var a = 0;
+            var listf = [2, 4, 9, 2, 8, 7];
+            var b = 0;
+            var reussite = 0;
+            var sature = 0;
+            // on compare les deux listes crée, si elle sont pareil on dit que le jeoueur a gagner le jeu sinon qu'il la perdu
+            while (sature < 6) {
+                a = listcode[sature];
+                b = listf[sature];
+
+                if (a == b) {
+                    reussite++;
                 }
+                else {
+                    alert("perdu vous vous étes tromper");
+                    break
+                }
+                sature++;
+                if (reussite >= 5) {
+                    alert("Vous avez gagné le jeu");
+                }
+
             }
-            newText("Grace au mission précedente, écris la combinaison dans l'ordre des missions, une combinaison dans chaque cellule de saisis","h2");
+        }
 
-
-
-        
-           //on crée une list qui sera crée en fonction des numéro taper dans chacun des input
-            var listcode=[0,0,0,0,0,0];
-            var a=0;
-            var code1 = newInput("saisir");
-                    code1.onkeydown = async (event) => {
-                        if (event.key == "Enter") {
-
-                            code1.disabled = true;
-                            listcode[0]=code1.value;
-                            a=a+1
-                            
-                        }
-                    }
-                    var code2 = newInput("saisir");
-                    code2.onkeydown = async (event) => {
-                        if (event.key == "Enter") {
-
-                            code2.disabled = true;
-                            listcode[0]=code2.value;
-                            a=a+1
-                            
-                        }
-                    }
-                    var code3 = newInput("saisir");
-                    code3.onkeydown = async (event) => {
-                        if (event.key == "Enter") {
-
-                            code3.disabled = true;
-                            listcode[2]=code3.value;
-                            a=a+1
-                            
-                        }
-                    }
-                    var code4 = newInput("saisir");
-                    code4.onkeydown = async (event) => {
-                        if (event.key == "Enter") {
-
-                            code4.disabled = true;
-                            listcode[3]=code4.value;
-                            a=a+1
-                            
-                        }
-                    }
-                    var code5 = newInput("saisir");
-                    code5.onkeydown = async (event) => {
-                        if (event.key == "Enter") {
-
-                            code5.disabled = true;
-                            listcode[4]=code5.value;
-                            a=a+1
-                            
-                        }
-                    }
-                    var code6 = newInput("saisir");
-                    code6.onkeydown = async (event) => {
-                        if (event.key == "Enter") {
-
-                            code6.disabled = true;
-                            listcode[5]=code6.value;
-                            a=a+1
-                            
-                        }
-                    }
-                    //on crée un boutton valider
-                    var valider = document.createElement('button');
-                                            valider.id = 'valider';
-                                            var texte = document.createTextNode('valider');
-                                            valider.appendChild(texte);
-                                            document.body.appendChild(valider);
-                    valider.onclick= function() {
-                        var a=0;
-                        var listf=[2,4,9,2,8,7];
-                        var b=0;
-                        var reussite=0;
-                        var sature=0;
-                        // on compare les deux listes crée, si elle sont pareil on dit que le jeoueur a gagner le jeu sinon qu'il la perdu
-                        while (sature < 6) {
-                            a=listcode[sature]
-                            b=listf[sature]
-                                        
-                                        if (a==b) {
-                                            reussite++;
-                                        }
-                                        else {
-                                            alert("perdu vous vous étes tromper");
-                                            break
-                                        }
-                                        sature++;
-                                        if (reussite >= 5) {
-                                            alert("Vous avez gagné le jeu");
-                                        }
-                                        
-                                    }
-                    }
-            
     </script>
-    
+
 </body>
+
 </html>
