@@ -121,20 +121,20 @@
                         var reussite=0;
                         var sature=0;
                         // on compare les deux listes crée, si elle sont pareil on dit que le jeoueur a gagner le jeu sinon qu'il la perdu
-                        while (sature != 6) {
+                        while (sature < 6) {
                             a=listcode[sature]
                             b=listf[sature]
                                         
                                         if (a==b) {
-                                            reussite++
+                                            reussite++;
                                         }
                                         else {
-                                            alert("perdu vous vous étes tromper")
+                                            alert("perdu vous vous étes tromper");
                                             break
                                         }
-                                        sature = sature + 1
-                                        if (reussite==6) {
-                                            alert("Vous avez gagner le jeu")
+                                        sature++;
+                                        if (reussite >= 5) {
+                                            alert("Vous avez gagné le jeu");
                                         }
                                         
                                     }
