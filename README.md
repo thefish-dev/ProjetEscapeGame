@@ -1,1 +1,1 @@
-# [Escape from Russia](https://legeek-glitch.github.io/ProjetEscapeGame/)
+# [Escape from Russia](https://thefish-dev.github.io/ProjetEscapeGame/)
